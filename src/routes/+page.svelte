@@ -1,5 +1,16 @@
-<script lang="typescript">
-	export let drinkProp;
+<script context="module" lang="ts">
+	export async function load({ fetch }) {
+		const drink: any = await (await fetch('index.json')).json();
+		console.log(drink);
+
+		return {
+			props: { drinkProp: drink }
+		};
+	}
+</script>
+
+<script lang="ts">
+	export let drinkProp = undefined;
 
 	let drinkState = drinkProp;
 
