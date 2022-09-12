@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	export async function load({ fetch }) {
-		const drink: any = await (await fetch('index.json')).json();
+		const drink: any = await (await fetch('page.json')).json();
 		console.log(drink);
 
 		return {
