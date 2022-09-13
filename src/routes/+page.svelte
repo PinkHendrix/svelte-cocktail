@@ -1,29 +1,20 @@
-<script context="module" lang="ts">
-	export async function load({ fetch }) {
-		const drink: any = await (await fetch('page.json')).json();
-		console.log(drink);
-
-		return {
-			props: { drinkProp: drink }
-		};
-	}
-</script>
-
 <script lang="ts">
-	export let drinkProp = undefined;
+	export let drinkProp: DrinkType;
 
-	let drinkState = drinkProp;
+	let drinkState: DrinkType = drinkProp;
 
 	const handleOnClick = async () => console.log('Click!');
 </script>
 
 <div class="wrapper">
 	<button on:click={handleOnClick}>Get New Drink</button>
-	<h2>Drink Name</h2>
-	<img class="drink-thumb" src="/" alt="drink-thumb" />
-	<p>Instructions</p>
+	<h2>{drinkState.name}</h2>
+	<img class="drink-thumb" src={drinkState.thumbUrl} alt="drink-thumb" />
+	<p>{drinkState.instructions}</p>
 
-	<p>Ingredients</p>
+	{#each drinkState.ingredients as ingredient}
+		<p class="ingredient">{ingredient.amount}{ingredient.name}</p>
+	{/each}
 </div>
 
 <style>
