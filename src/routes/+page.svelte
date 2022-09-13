@@ -1,9 +1,24 @@
+<script context="module" lang="ts">
+	import type { DrinkType } from '../types';
+
+	export async function load({ fetch }) {
+		const drink: DrinkType = await (await fetch('index.json')).json();
+
+		return {
+			props: { drinkProp: drink }
+		};
+	}
+</script>
+
 <script lang="ts">
 	export let drinkProp: DrinkType;
 
 	let drinkState: DrinkType = drinkProp;
 
-	const handleOnClick = async () => console.log('Click!');
+	const handleOnClick = async () => {
+		const result = await (await fetch('index.json')).json();
+		drinkState = result;
+	};
 </script>
 
 <div class="wrapper">
@@ -35,7 +50,7 @@
 		text-align: center;
 	}
 
-	.ingredients {
+	.ingredient {
 		margin: 2px 0;
 	}
 </style>
